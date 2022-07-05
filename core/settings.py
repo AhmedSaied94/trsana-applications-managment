@@ -25,17 +25,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['DEV_KEY'] if DEBUG else os.environ['PROD_KEY']
 
-ALLOWED_HOSTS = ['localhost', '44.229.203.159']
+ALLOWED_HOSTS = ['localhost', '34.221.193.108']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    "corsheaders",
     'admin_interface',
     'colorfield',
     'django.contrib.admin',
@@ -47,7 +48,6 @@ INSTALLED_APPS = [
 
     'custom_account',
     'trsana',
-
     'crispy_forms',
     "crispy_bootstrap5",
     'mathfilters',
@@ -63,6 +63,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -74,6 +75,8 @@ ROOT_URLCONF = 'core.urls'
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
 SILENCED_SYSTEM_CHECKS = ["security.W019"]
+CORS_ALLOW_ALL_ORIGINS = True
+#SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 TEMPLATES = [
     {
