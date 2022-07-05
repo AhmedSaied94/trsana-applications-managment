@@ -20,7 +20,6 @@ class CustomSignForm(SignupForm):
             attrs={'class': 'form-control', 'style': 'width:450px'}), max_length=20, required=False, label='الهاتف')
         self.fields['gender'] = forms.ChoiceField(
             widget=forms.Select(attrs={'class': 'form-control', 'style': 'width:450px'}), choices=Gender.choices, required=False, label='النوع')
-        super(CustomSignForm, self).__init__(*args, **kwargs)
         self.fields['password1'] = PasswordField(
             label='كلمة المرور', attrs={'class': 'form-control', 'style': 'width:450px'})
         self.fields['password2'] = PasswordField(label='اعد كلمة المرور', attrs={
