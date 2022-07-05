@@ -1,6 +1,27 @@
 {% extends 'base/main.html' %}
 {% block title %}الترسانة البحرية مركز التدريب{% endblock title %}
+{% block extra_head %}
+<style>
+    #home{
+        background-image: url(/home.jpeg);
+        background-size: cover;
+    }
+</style>
+{% endblock extra_head %}
 {% block main %}
 
+<div id='home'></div>
 
 {% endblock main %}
+
+{% block extra_body %}
+<script>
+    let winH = $(window).height()
+    let headnavH = $("#headnav").innerHeight()
+
+
+
+    $('#home').css('min-height', winH - headnavH)
+    $('.main-section').css('margin-top', headnavH)
+</script>
+{% endblock extra_body %}

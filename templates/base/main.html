@@ -10,7 +10,7 @@
     {% block extra_head %}{% endblock %}
   </head>
   <body>
-    <header style="direction: rtl">
+    <header id='headnav' style="direction: rtl">
       <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
           <a class="navbar-brand" href="/">Trsana</a>
@@ -109,10 +109,11 @@
           </ul>
         </div>
       {% endif %}
-      {% block main %}{% endblock %} {% block extra_body %}{% endblock %}
     </div>
 
     <script src="{% static 'jquery.min.js' %}"></script>
     <script src="{% static 'bootstrap.bundle.js' %}"></script>
+    {% block main %}{% endblock %} {% block extra_body %}{% endblock %}
+
   </body>
 </html>

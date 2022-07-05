@@ -97,7 +97,7 @@ def add_student(request):
             grades.computer = grades_data['computer']
             grades.student = student
             grades.save()
-            return redirect('student_details', context={'student': student})
+            return redirect('student_detail', student.id)
     return render(request, 'trsana/add_student.html', context=context)
 
 
