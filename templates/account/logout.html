@@ -1,0 +1,22 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Sign Out" %}{% endblock %}
+
+{% block content %}
+<div style='direction:rtl;' class='py-4'>
+<h1>تسجيل الخروج</h1>
+
+<p class='mt-5'>هل انت متاكد من رغبتك في تسجيل الخروج</p>
+
+<form method="post" action="{% url 'account_logout' %}">
+  {% csrf_token %}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+  {% endif %}
+  <button class='btn btn-primary' type="submit">تسجيل الخروج</button>
+</form>
+</div>
+
+{% endblock %}

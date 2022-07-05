@@ -1,0 +1,33 @@
+{% extends 'base/main.html' %} {% load crispy_forms_tags %}
+ {% block title %}{{ title }}{% endblock %} {% block main %}
+<div>
+  <form
+    method="POST"
+    action="{% if url == 'add-student' %}{% url 'add-student' %}{% else %}{% url 'update-student' url %}{% endif %}"
+    enctype="multipart/form-data"
+    style='direction:rtl;'
+    class='p-5'
+  >
+    {% csrf_token %}
+
+    <h2>بيانات الطالب</h2>
+    <div class='d-flex justify-content-between flex-wrap py-4'>
+      {{ student_form|crispy }} 
+    </div> 
+
+    <h2>تقييم اللجنة</h2>
+    <div class='d-flex justify-content-between flex-wrap py-4'>
+      {{ committee_form|crispy }} 
+    </div> 
+
+    <h2>درجات الطالب</h2>
+    <div class='d-flex justify-content-between flex-wrap py-4'>
+      {{ grades_form|crispy }}
+    </div> 
+
+
+    <button class="btn btn-primary w-100" type="submit">{{ btn }}</button>
+  </form>
+</div>
+
+{% endblock %}

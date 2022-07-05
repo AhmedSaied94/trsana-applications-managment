@@ -1,0 +1,78 @@
+{% extends 'base/main.html' %}
+{% block title %}نتائج الطلاب{% endblock title %}
+{% block main %}
+<div style='direction:rtl;'>
+    <form class='d-flex py-5' action="{% url 'results' %}" method='GET' enctype="multipart/form-data">
+        <div class="form-group ms-3">
+            <select name='city' class="form-select" id="city">
+                <option value="" disabled selected>اختر محافظة</option>
+                <option value="الكل">الكل</option>
+                <option value="الاسكندرية">الاسكندرية</option>
+                <option value="البحيرة">البحيرة</option>
+                <option value="كفرالشيخ">كفر الشيخ</option>
+                <option value="الشرقية">الشرقية</option>
+                <option value="الغربية">الغربية</option>
+                <option value="المنوفية">المنوفية</option>
+                <option value="الدقهلية">الدقهلية</option>
+                <option value="القليوبية">القليوبية</option>
+                <option value="دمياط">دمياط</option>
+            </select>
+          </div>
+          <div class="form-group mx-3">
+            <select name='result' class="form-select" id="result">
+                <option value="" disabled selected>اختر نتيجة</option>
+                <option value="الكل">الكل</option>
+                <option value="ناجح">ناجح</option>
+                <option value="راسب">راسب</option>
+
+            </select>
+          </div>
+          <div class="form-group mx-3">
+            <select name='sort' class="form-select" id="sort">
+                <option value="" disabled selected>ترتيب</option>
+                <option value="بدون">بدون</option>
+                <option value="الاعلى درجات">الاعلى درجات</option>
+                <option value="الاقل درجات">الاقل درجات</option>
+                <option value="ا - ي">ا - ي</option>
+                <option value="ي - ا">ي - ا</option>
+            </select>
+          </div>
+          <input type="submit" class="btn btn-primary mx-3" value="تصفية">
+    </form>
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">اسم الطالب</th>
+                    <th scope="col">مجموع الدرجات المواد</th>
+                    <th scope="col">نتيجة تقييم المواد</th>
+                    <th scope="col">مجموع درجات اللجنة</th>
+                    <th scope="col">نتيجة تقييم الللجنة</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% if students|length > 0 %}
+                    {% for student in students %}
+                        <tr class="{% if student.student_grades.result == 'ناجح' %} table-success {% else %} table-danger {% endif %}">
+                            <td><a style='color:inherit;' href="{{ student.get_absolute_url }}">{{ student.name }}</a></td>
+                            <td>{{ student.student_grades.total }}</td>
+                            <td>{{ student.student_grades.result }}</td>
+                            <td>{{ student.committee_eval.total }}</td>
+                            <td>{{ student.committee_eval.result }}</td>
+                        </tr>
+                    {% endfor %}
+                {% else %}
+                    <tr class="table-warning">
+                        <td class='text-center' colspan='5'>
+                            <h4 class="my-2">لا يوجد طلبة من هذه المحافظة</h4>
+                        </td>
+                    </tr>
+                {% endif %}
+
+
+            </tbody>
+          </table>
+    </div>
+</div>
+
+{% endblock main %}

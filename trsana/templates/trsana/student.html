@@ -1,0 +1,130 @@
+{% extends 'base/main.html' %}
+{% block title %}{{ student.name }}{% endblock %}
+{% block main %}
+
+<div style='direction:rtl;'>
+    <div class='d-flex justify-content-between align-items-center py-5'>
+        <h1>الطالب {{ student.name }}</h1>
+        <img class='rounded' src="{{ student.student_pic.url }}" alt="{{ student.name }}" style='width:150px; height:150px;'>
+        <div class='d-flex flex-column'>
+            <a href="{% url 'add-student' %}" class='btn btn-primary'>اضافة طالب جديد</a>
+            <a href='{{ student.get_update_url }}' class='btn btn-success my-1'>تعديل بيانات الطالب</a>
+            <a href='{{ student.get_delete_url }}' class='btn btn-danger mb-1'>حذف بيانات الطالب</a>
+            <button class='btn btn-warning'>طباعة بيانات الطالب</button>
+        </div>
+    </div>
+    <div>
+        {% comment %} <h3>البيانات الشخصية</h3> {% endcomment %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th colspan='4'>البيانات الشخصية</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr class="table-light">
+                <td>رقم الملف</td>
+                <td>{{ student.file_no }}</td>
+                <td>المجموعة</td>
+                <td>{{ student.group }}</td>
+              </tr>
+              <tr class="">
+                <td>الدفعة</td>
+                <td>{{ student.batch }}</td>
+                <td>تاريخ الميلاد</td>
+                <td>{{ student.birthdate }}</td>
+              </tr>
+              <tr class="table-light">
+                <td>الديانة</td>
+                <td>{{ student.religion }}</td>
+                <td>محل الميلاد</td>
+                <td>{{ student.birthplace }}</td>
+              </tr>
+              <tr class="">
+                <td>العنوان</td>
+                <td>{{ student.address }}</td>
+                <td>الجنسية</td>
+                <td>{{ student.nationality }}</td>
+              </tr>
+              <tr class="table-light">
+                <td>سنة اتمام الشهادة الاعدادية</td>
+                <td>{{ student.junior_cert_year }}</td>
+                <td>مجموع الشهادة الاعدادية</td>
+                <td>{{ student.junior_cert_total }}</td>
+              </tr>
+              <tr class="">
+                <td>اسم ولي الامر</td>
+                <td>{{ student.guardian }}</td>
+                <td>صلة قرابة ولي الامر</td>
+                <td>{{ student.guardian_rel }}</td>
+              </tr>
+              <tr class="table-light">
+                <td>رقم هاتف ولي الامر</td>
+                <td>{{ student.guardian_phone }}</td>
+                <td>الرقم القومي</td>
+                <td>{{ student.national_id }}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+    <div class='my-4'>
+        {% comment %} <h3>تقييمات اللجنة</h3> {% endcomment %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th colspan='4'>تقييمات اللجنة</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr class="table-light">
+                <td colspan='2'>تقييم رثيس اللجنة</td>
+                <td colspan='2'>{{ student.committee_eval.committee_chairman }}</td>
+              </tr>
+              <tr class="">
+                <td>تقييم العضو الاول</td>
+                <td>{{ student.committee_eval.first_member }}</td>
+                <td>تقييم العضو الثاني</td>
+                <td>{{ student.committee_eval.second_member }}</td>
+              </tr>
+              <tr class="table-light">
+                <td>تقييم العضو الثالث</td>
+                <td>{{ student.committee_eval.third_member }}</td>
+                <td>تقييم العضو الرابع</td>
+                <td>{{ student.committee_eval.forth_member }}</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+
+    <div>
+        {% comment %} <h3>درجات الطالب</h3> {% endcomment %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th colspan='4'>درجات الطالب</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr class="table-light">
+                <td>اللغة العربية</td>
+                <td>{{ student.student_grades.arabic }}/10</td>
+                <td>الرياضيات</td>
+                <td>{{ student.student_grades.math }}/10</td>
+              </tr>
+              <tr class="">
+                <td>العلوم</td>
+                <td>{{ student.student_grades.science }}/10</td>
+                <td>الدراسات الاجتماعية</td>
+                <td>{{ student.student_grades.social_studies }}/10</td>
+              </tr>
+              <tr class="table-light">
+                <td colspan='2'>الحاسب الالي</td>
+                <td colspan='2'>{{ student.student_grades.computer }}/10</td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+</div>
+
+{% endblock main %}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body>
+    <header style="direction: rtl">
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+          <a class="navbar-brand" href="/">Trsana</a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarColor01"
+            aria-controls="navbarColor01"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link {% if title == 'home' %}active{% endif %}" href="{% url 'home' %}"
+                  >الرئيسية
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if title == 'add' %}active{% endif %}" href="{% url 'add-student' %}">اضافة طالب</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if title == 'students' %}active{% endif %}" href="{% url 'students' %}">الطلاب</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if title == 'results' %}active{% endif %}" href="{% url 'results' %}">النتائج</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {% if title == 'about' %}active{% endif %}" href="{% url 'about' %}">عن البرنامج</a>
+              </li>
+              {% comment %} <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                  href="#"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  >Dropdown</a
+                >
+                <div class="dropdown-menu">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+              </li> {% endcomment %}
+            </ul>
+            <ul class="navbar-nav">
+              {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a href="{% url 'account_logout' %}" class='nav-link'>تسجيل الخروج</a>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a href="{% url 'account_login' %}" class='nav-link'>تسجيل الدخول</a>
+                </li>
+                <li class="nav-item">
+                  <a href="{% url 'account_signup' %}" class='nav-link'>التسجيل</a>
+                </li>
+              {% endif %}
+            </ul>
+            <form action="{% url 'students' %}" method='GET' enctype="multipart/form-data" class="d-flex">
+              <input
+                class="form-control me-sm-2"
+                type="text"
+                placeholder="ابحث عن الطالب"
+                name='search'
+
+              />
+              <button class="btn btn-dark my-2 my-sm-0" type="submit">
+                ابحث
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container">
+      {% if messages %}
+        <div class='py-3'>
+          <ul style='list-style:none;' class='p-0'>
+            {% for message in messages %}
+            <li>
+              <div class="alert alert-dismissible alert-primary">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <strong>message</strong> {{ message }}
+              </div>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+      {% block main %}{% endblock %} {% block extra_body %}{% endblock %}
+    </div>
+
+    <script src="{% static 'jquery.min.js' %}"></script>
+    <script src="{% static 'bootstrap.bundle.js' %}"></script>
+  </body>
+</html>

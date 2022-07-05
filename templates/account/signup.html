@@ -1,0 +1,27 @@
+{% extends "account/base.html" %} {% load crispy_forms_tags %} {% load i18n %}
+{% block title %}حساب جديد{% endblock %} {% block content %}
+<div style="direction: rtl" class="py-5">
+  <h1>حساب جديد</h1>
+
+  <p>
+    {% blocktrans %}لديك حساب بالفعل؟ قم
+    <a href="{{ login_url }}">بتسجيل الدخول</a>.{% endblocktrans %}
+  </p>
+
+  <form
+    class="signup py-4 d-flex flex-wrap justify-content-between"
+    id="signup_form"
+    method="post"
+    action="{% url 'account_signup' %}"
+  >
+    {% csrf_token %} {{ form|crispy }} {% if redirect_field_value %}
+    <input
+      type="hidden"
+      name="{{ redirect_field_name }}"
+      value="{{ redirect_field_value }}"
+    />
+    {% endif %}
+    <button class="btn btn-primary w-100" type="submit">التسجيل &raquo;</button>
+  </form>
+</div>
+{% endblock %}
