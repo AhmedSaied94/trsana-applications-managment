@@ -41,7 +41,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     username = models.CharField(
         max_length=255, unique=True, validators=[username_validator])
-    phone = models.CharField(max_length=50, unique=True, null=True)
+    phone = models.CharField(max_length=50, unique=True, null=True, blank=True)
     first_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255, blank=True, null=True)
     join_date = models.DateTimeField(default=timezone.now)
