@@ -15,7 +15,7 @@ class CustomSignForm(SignupForm):
         attrs={'class': 'form-control', 'style': 'width:450px'}), max_length=20, required=False, label='الاسم الاخير')
     phone = forms.CharField(widget=forms.NumberInput(
         attrs={'class': 'form-control', 'style': 'width:450px'}), max_length=20, required=False, label='الهاتف')
-    gender = forms.ChoiceField(
+    gender = forms.CharField(
         widget=forms.Select(attrs={'class': 'form-control', 'style': 'width:450px'}), choices=Gender.choices, required=False, label='النوع')
 
     def __init__(self, *args, **kwargs):
