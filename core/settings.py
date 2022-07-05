@@ -53,7 +53,7 @@ INSTALLED_APPS = [
     'mathfilters',
     'django_extensions',
     'django.contrib.sites',
-    'gunicorn'
+    'gunicorn',
 
     'allauth',
     'allauth.account',
