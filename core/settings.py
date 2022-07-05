@@ -193,3 +193,4 @@ ACCOUNT_FORMS = {
     # 'reset_password_from_key': 'allauth.account.forms.ResetPasswordKeyForm',
     # 'disconnect': 'allauth.socialaccount.forms.DisconnectForm',
 }
+FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024
