@@ -112,10 +112,10 @@
         </div>
       {% endif %}
     </div>
-
+    {% block main %}{% endblock %}
     <script src="{% static 'jquery.min.js' %}"></script>
     <script src="{% static 'bootstrap.bundle.js' %}"></script>
-    {% block main %}{% endblock %} {% block extra_body %}{% endblock %}
+    {% block extra_body %}{% endblock %}
 
   </body>
 </html>
