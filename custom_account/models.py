@@ -29,6 +29,11 @@ class UserProfileManager(BaseUserManager):
         return user
 
 
+class Gender(models.TextChoices):
+    ذكر = 'ذكر', 'ذكر'
+    انثى = 'انثى', 'انثى'
+
+
 class UserProfile(AbstractBaseUser, PermissionsMixin):
 
     username_validator = UnicodeUsernameValidator()
@@ -36,11 +41,12 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     username = models.CharField(
         max_length=255, unique=True, validators=[username_validator])
-    phone = models.IntegerField(unique=True, null=True)
+    phone = models.CharField(max_length=50, unique=True, null=True)
     first_name = models.CharField(max_length=255, blank=True, null=True)
     last_name = models.CharField(max_length=255, blank=True, null=True)
     join_date = models.DateTimeField(default=timezone.now)
-    gender = models.CharField(max_length=255, blank=True, null=True)
+    gender = models.CharField(
+        max_length=255, blank=True, null=True, choices=Gender.choices)
 
     is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)

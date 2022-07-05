@@ -1,10 +1,7 @@
 from django import forms
 from allauth.account.forms import LoginForm, SignupForm, PasswordField
 from django.conf import settings
-CHOICES = (
-    ('male', 'Male'),
-    ('female', 'Female')
-)
+from .models import Gender
 
 
 class CustomSignForm(SignupForm):
@@ -19,7 +16,7 @@ class CustomSignForm(SignupForm):
     phone = forms.CharField(widget=forms.NumberInput(
         attrs={'class': 'form-control', 'style': 'width:450px'}), max_length=20, required=False, label='الهاتف')
     gender = forms.ChoiceField(
-        widget=forms.Select(attrs={'class': 'form-control', 'style': 'width:450px'}), choices=CHOICES, required=False, label='النوع')
+        widget=forms.Select(attrs={'class': 'form-control', 'style': 'width:450px'}), choices=Gender.choices, required=False, label='النوع')
 
     def __init__(self, *args, **kwargs):
         super(CustomSignForm, self).__init__(*args, **kwargs)
