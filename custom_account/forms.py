@@ -1,4 +1,3 @@
-from tkinter.ttk import Style
 from django import forms
 from allauth.account.forms import LoginForm, SignupForm, PasswordField
 from django.conf import settings
