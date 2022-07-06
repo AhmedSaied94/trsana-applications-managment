@@ -109,7 +109,7 @@
     <div>
       <div id='home'></div>
       {% if messages %}
-      <div id='messages' class='container py-3'>
+      <div id='messages' class='container py-3 position-absolute'>
         <ul style='list-style:none;' class='p-0'>
           {% for message in messages %}
           <li>
@@ -133,8 +133,8 @@
     <script src="{% static 'bootstrap.bundle.js' %}"></script>
     <script>
 
-      let headnavH = $("#headnav").innerHeight() 
-      $('#messages').css('position', 'absolute')
+      let headnavH = $("#headnav").innerHeight()
+      console.log(headnavH) 
       $('#messages').css('top', 'headnavH')
     </script>
     {% block extra_body %}{% endblock %}
