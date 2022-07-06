@@ -8,6 +8,9 @@
     }
 </style>
 {% endblock extra_head %}
+{% block home %}
+<div id='home'></div>
+{% endblock home %}
 {% block main %}
 
 
@@ -15,7 +18,6 @@
 {% endblock main %}
 
 {% block extra_body %}
-<div id='home'></div>
 <script>
     let winH = $(window).height()
     let headnavH = $("#headnav").innerHeight()

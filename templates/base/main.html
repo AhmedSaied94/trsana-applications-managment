@@ -106,26 +106,37 @@
         </div>
       </nav>
     </header>
-    <div class="container">
+    <div>
+      {% block home %}
       {% if messages %}
-        <div class='py-3'>
-          <ul style='list-style:none;' class='p-0'>
-            {% for message in messages %}
-            <li>
-              <div class="alert alert-dismissible alert-primary">
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                <strong>message</strong> {{ message }}
-              </div>
-            </li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
+      <div id='messages' class='container py-3'>
+        <ul style='list-style:none;' class='p-0'>
+          {% for message in messages %}
+          <li>
+            <div class="alert alert-dismissible alert-primary">
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+              <strong>message</strong> {{ message }}
+            </div>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+    {% endblock home %}
+    </div>
+    <div class="container">
+
     {% block main %}{% endblock %}
 
     </div>
     <script src="{% static 'jquery.min.js' %}"></script>
     <script src="{% static 'bootstrap.bundle.js' %}"></script>
+    <script>
+
+      let headnavH = $("#headnav").innerHeight() 
+      $('#messages').css('position', 'absolute')
+      $('#messages').css('top', 'headnavH')
+    </script>
     {% block extra_body %}{% endblock %}
 
   </body>
