@@ -2,7 +2,7 @@
 {% block title %}نتائج الطلاب{% endblock title %}
 {% block main %}
 <div style='direction:rtl;'>
-    <div class='d-flex justify-content-center align-items-between py-5'>
+    <div class='d-flex justify-content-between align-items-center'>
         <form class='d-flex' action="{% url 'results' %}" method='GET' enctype="multipart/form-data">
             <div class="form-group ms-3">
                 <select name='city' class="form-select" id="city">
@@ -40,7 +40,7 @@
               </div>
               <input type="submit" class="btn btn-primary mx-3" value="تصفية">
         </form>
-        <button class='btn btn-warning' id='printBtn'>طباعة</button>
+        <button class='btn btn-warning px-4' id='printBtn'>طباعة</button>
     </div>
 
     <div>
