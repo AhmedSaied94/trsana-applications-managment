@@ -2,43 +2,47 @@
 {% block title %}نتائج الطلاب{% endblock title %}
 {% block main %}
 <div style='direction:rtl;'>
-    <form class='d-flex py-5' action="{% url 'results' %}" method='GET' enctype="multipart/form-data">
-        <div class="form-group ms-3">
-            <select name='city' class="form-select" id="city">
-                <option value="" disabled selected>اختر محافظة</option>
-                <option value="الكل">الكل</option>
-                <option value="الاسكندرية">الاسكندرية</option>
-                <option value="البحيرة">البحيرة</option>
-                <option value="كفرالشيخ">كفر الشيخ</option>
-                <option value="الشرقية">الشرقية</option>
-                <option value="الغربية">الغربية</option>
-                <option value="المنوفية">المنوفية</option>
-                <option value="الدقهلية">الدقهلية</option>
-                <option value="القليوبية">القليوبية</option>
-                <option value="دمياط">دمياط</option>
-            </select>
-          </div>
-          <div class="form-group mx-3">
-            <select name='result' class="form-select" id="result">
-                <option value="" disabled selected>اختر نتيجة</option>
-                <option value="الكل">الكل</option>
-                <option value="ناجح">ناجح</option>
-                <option value="راسب">راسب</option>
+    <div class='d-flex justify-content-center align-items-between py-5'>
+        <form class='d-flex' action="{% url 'results' %}" method='GET' enctype="multipart/form-data">
+            <div class="form-group ms-3">
+                <select name='city' class="form-select" id="city">
+                    <option value="" disabled selected>اختر محافظة</option>
+                    <option value="الكل">الكل</option>
+                    <option value="الاسكندرية">الاسكندرية</option>
+                    <option value="البحيرة">البحيرة</option>
+                    <option value="كفرالشيخ">كفر الشيخ</option>
+                    <option value="الشرقية">الشرقية</option>
+                    <option value="الغربية">الغربية</option>
+                    <option value="المنوفية">المنوفية</option>
+                    <option value="الدقهلية">الدقهلية</option>
+                    <option value="القليوبية">القليوبية</option>
+                    <option value="دمياط">دمياط</option>
+                </select>
+              </div>
+              <div class="form-group mx-3">
+                <select name='result' class="form-select" id="result">
+                    <option value="" disabled selected>اختر نتيجة</option>
+                    <option value="الكل">الكل</option>
+                    <option value="ناجح">ناجح</option>
+                    <option value="راسب">راسب</option>
+    
+                </select>
+              </div>
+              <div class="form-group mx-3">
+                <select name='sort' class="form-select" id="sort">
+                    <option value="" disabled selected>ترتيب</option>
+                    <option value="بدون">بدون</option>
+                    <option value="الاعلى درجات">الاعلى درجات</option>
+                    <option value="الاقل درجات">الاقل درجات</option>
+                    <option value="ا - ي">ا - ي</option>
+                    <option value="ي - ا">ي - ا</option>
+                </select>
+              </div>
+              <input type="submit" class="btn btn-primary mx-3" value="تصفية">
+        </form>
+        <button class='btn btn-warning' id='printBtn'>طباعة</button>
+    </div>
 
-            </select>
-          </div>
-          <div class="form-group mx-3">
-            <select name='sort' class="form-select" id="sort">
-                <option value="" disabled selected>ترتيب</option>
-                <option value="بدون">بدون</option>
-                <option value="الاعلى درجات">الاعلى درجات</option>
-                <option value="الاقل درجات">الاقل درجات</option>
-                <option value="ا - ي">ا - ي</option>
-                <option value="ي - ا">ي - ا</option>
-            </select>
-          </div>
-          <input type="submit" class="btn btn-primary mx-3" value="تصفية">
-    </form>
     <div>
         <table class="table table-hover">
             <thead>
@@ -76,3 +80,9 @@
 </div>
 
 {% endblock main %}
+{% block extra_body %}
+<script>
+var printBtn = document.getElementById('printBtn')
+printBtn.addEventListener('click', () => window.print())
+</script>
+{% endblock extra_body %} 
