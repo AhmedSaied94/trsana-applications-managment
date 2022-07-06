@@ -10,7 +10,7 @@
             <a href="{% url 'add-student' %}" class='btn btn-primary'>اضافة طالب جديد</a>
             <a href='{{ student.get_update_url }}' class='btn btn-success my-1'>تعديل بيانات الطالب</a>
             <a href='{{ student.get_delete_url }}' class='btn btn-danger mb-1'>حذف بيانات الطالب</a>
-            <button class='btn btn-warning'>طباعة بيانات الطالب</button>
+            <button class='btn btn-warning' id='printBtn'>طباعة بيانات الطالب</button>
         </div>
     </div>
     <div>
@@ -128,3 +128,9 @@
 </div>
 
 {% endblock main %}
+{% block extra_body %}
+<script>
+var printBtn = document.getElementById('printBtn')
+printBtn.addEventListener('click', () => window.print())
+</script>
+{% endblock extra_body %} 
