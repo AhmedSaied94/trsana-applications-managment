@@ -99,11 +99,9 @@
                 ابحث
               </button>
             </form>
-            {% comment %} {% if request.user.is_superuser %}
+            {% if request.user.is_superuser %}
               <a href="/admin" class='btn btn-danger'>لوحة التحكم</a>
-            {% endif %} {% endcomment %}
-            <a href="/admin" class='btn btn-danger'>لوحة التحكم</a>
-
+            {% endif %}
           </div>
         </div>
       </nav>
