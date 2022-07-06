@@ -60,9 +60,9 @@
                         <tr class="{% if student.student_grades.result == 'ناجح' %} table-success {% else %} table-danger {% endif %}">
                             <td><a style='color:inherit;' href="{{ student.get_absolute_url }}">{{ student.name }}</a></td>
                             <td>{{ student.student_grades.total }}</td>
-                            <td>{{ student.student_grades.result }}</td>
+                            <td class="{% if student.student_grades.result == 'ناجح' %} text-success {% else %} text-danger {% endif %}">{{ student.student_grades.result }}</td>
                             <td>{{ student.committee_eval.total }}</td>
-                            <td>{{ student.committee_eval.result }}</td>
+                            <td class="{% if student.student_grades.result == 'ناجح' %} text-success {% else %} text-danger {% endif %}">{{ student.committee_eval.result }}</td>
                         </tr>
                     {% endfor %}
                 {% else %}
