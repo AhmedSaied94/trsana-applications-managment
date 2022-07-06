@@ -8,6 +8,13 @@
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
     <link rel="icon" href="http://34.221.193.108/media/logo.ico">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&display=swap');
+      * {
+        font-family: 'Cairo', sans-serif;
+        scroll-behavior: smooth;
+      }
+    </style>
     {% block extra_head %}{% endblock %}
   </head>
   <body>
