@@ -99,6 +99,9 @@
                 ابحث
               </button>
             </form>
+            {% if requset.user.is_superuser %}
+              <a href="/admin" class='btn btn-danger'>لوحة التحكم</a>
+            {% endif %}
           </div>
         </div>
       </nav>
