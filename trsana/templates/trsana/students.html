@@ -1,5 +1,15 @@
 {% extends 'base/main.html' %}
 {% block title %}الطلاب{% endblock title %}
+{% block extra_head %}
+    <style>
+        #student{
+            transition: all linear 3s;
+        }
+        #student:hover{
+            transform: scale(1.1);
+        }
+    </style>
+{% endblock extra_head %}
 {% block main %}
 <div style='direction:rtl;'>
     <form class='d-flex py-5' action="{% url 'students' %}" method='GET' enctype="multipart/form-data">
@@ -44,7 +54,7 @@
 <div class='d-flex justify-content-center align-items-center py-5' style='direction:rtl;'>
     {% if students|length > 0 %}
         {% for student in students %}
-            <div class="card mb-3 mx-2 align-self-stretch" style='max-width:300px'>
+            <div id='student' class="card mb-3 mx-2 align-self-stretch" style='max-width:300px'>
                 <h4 class="card-header">{{ student.name }}</h4>
                 <div class="card-body">
                 <h5 class="card-title">رقم الملف: {{ student.file_no }}</h5>
