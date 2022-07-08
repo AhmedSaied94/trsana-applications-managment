@@ -103,12 +103,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
-        # 'HOST': 'localhost',
-        # 'USER': 'trsana',
-        # 'PASSWORD': 'trsana.com',
-        # 'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'trasana',
+        'HOST': 'localhost',
+        'USER': 'trsana',
+        'PASSWORD': 'trsana.com',
+        'PORT': '',
     }
 }
 
