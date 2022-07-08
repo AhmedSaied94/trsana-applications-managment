@@ -42,9 +42,11 @@
                   >الرئيسية
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link {% if title == 'add' %}active{% endif %}" href="{% url 'add-student' %}">اضافة طالب</a>
-              </li>
+              {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                  <a class="nav-link {% if title == 'add' %}active{% endif %}" href="{% url 'add-student' %}">اضافة طالب</a>
+                </li>
+              {% endif %}
               {% if request.user.is_staff %}
                 <li class="nav-item">
                   <a class="nav-link {% if title == 'students' %}active{% endif %}" href="{% url 'students' %}">الطلاب</a>
