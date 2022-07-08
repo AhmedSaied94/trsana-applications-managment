@@ -8,19 +8,16 @@ from import_export.admin import ImportExportMixin, ImportExportModelAdmin
 class StudentResource(resources.ModelResource):
     class Meta:
         model = Student
-        fields = '__all__'
 
 
 class CommitteeEvaluationResource(resources.ModelResource):
     class Meta:
         model = CommitteeEvaluation
-        fields = '__all__'
 
 
 class StudentGradesResource(resources.ModelResource):
     class Meta:
         model = StudentGrades
-        fields = '__all__'
 
 
 # @admin.register(Student)
