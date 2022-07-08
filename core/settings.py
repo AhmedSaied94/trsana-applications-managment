@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'django.contrib.sites',
     'gunicorn',
+    'import_export',
 
     'allauth',
     'allauth.account',
@@ -194,3 +195,6 @@ ACCOUNT_FORMS = {
     # 'disconnect': 'allauth.socialaccount.forms.DisconnectForm',
 }
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
+IMPORT_EXPORT_SKIP_ADMIN_LOG = True
