@@ -5,22 +5,34 @@ from import_export.admin import ImportExportMixin
 # Register your models here.
 
 
-@admin.register(Student)
-class StudentAdmin(admin.ModelAdmin, ImportExportMixin):
-    pass
-
-
-@admin.register(CommitteeEvaluation)
-class CommitteeEvaluationAdmin(admin.ModelAdmin, ImportExportMixin):
-    pass
-
-
-@admin.register(StudentGrades)
-class StudentGradesAdmin(admin.ModelAdmin, ImportExportMixin):
-    pass
-
-
 class StudentResource(resources.ModelResource):
     class Meta:
         model = Student
         fields = '__all__'
+
+
+class CommitteeEvaluationResource(resources.ModelResource):
+    class Meta:
+        model = CommitteeEvaluation
+        fields = '__all__'
+
+
+class StudentGradesResource(resources.ModelResource):
+    class Meta:
+        model = StudentGrades
+        fields = '__all__'
+
+
+@admin.register(Student)
+class StudentAdmin(admin.ModelAdmin, ImportExportMixin):
+    resource_class = StudentResource
+
+
+@admin.register(CommitteeEvaluation)
+class CommitteeEvaluationAdmin(admin.ModelAdmin, ImportExportMixin):
+    resource_class = CommitteeEvaluationResource
+
+
+@admin.register(StudentGrades)
+class StudentGradesAdmin(admin.ModelAdmin, ImportExportMixin):
+    resource_class = StudentGradesResource
