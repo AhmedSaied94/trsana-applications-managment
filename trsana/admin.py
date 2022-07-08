@@ -8,6 +8,9 @@ from import_export.admin import ImportExportMixin, ImportExportModelAdmin
 class StudentResource(resources.ModelResource):
     class Meta:
         model = Student
+        exclude = ('student_pic', )
+        export_order = ('id', 'name', 'file_no', 'group', 'batch', 'birthplace', 'address', 'birthdate', 'religion',
+                        'nationality', 'junior_cert_year', 'junior_cert_total', 'guardian', 'guardian_rel', 'guardian_phone', 'national_id')
 
 
 class CommitteeEvaluationResource(resources.ModelResource):
