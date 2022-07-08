@@ -19,6 +19,7 @@ django-admin = "*"
 interface = "*"
 django-admin-interface = "*"
 django-cors-headers = "*"
+django-import-export = "*"
 
 [dev-packages]
 autopep8 = "*"
