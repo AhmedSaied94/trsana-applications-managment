@@ -10,7 +10,7 @@
             <a href="{% url 'add-student' %}" class='btn btn-primary'>اضافة طالب جديد</a>
             <a href='{{ student.get_update_url }}' class='btn btn-success my-1'>تعديل بيانات الطالب</a>
             {% comment %} <a href='{{ student.get_delete_url }}' class='btn btn-danger mb-1'>حذف بيانات الطالب</a> {% endcomment %}
-            <button class='btn btn-danger' onclick="delMod('show')">حذف الطالب</button>
+            <button class='btn btn-danger mb-1' onclick="delMod('show')" data-bs-toggle="modal" data-bs-target="#model-con">حذف الطالب</button>
             <button class='btn btn-warning' id='printBtn'>طباعة بيانات الطالب</button>
         </div>
     </div>
@@ -152,8 +152,7 @@
               </tr>
             </tbody>
           </table>
-          <div id='model-con' class='position-absolute' style='width:100vh; height:100vh z-index:1000; top:0; left:0; display:none;'>
-            <div class="modal">
+            <div class="modal" id="model-con">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -170,7 +169,6 @@
                   </div>
                 </div>
               </div>
-            </div>
           </div>
     </div>
 </div>
@@ -180,11 +178,11 @@
 <script>
 var printBtn = document.getElementById('printBtn')
 printBtn.addEventListener('click', () => window.print())
-var dmodel = $('#model-con')
+{% comment %} var dmodel = $('#model-con')
 var delMod = state => {
   console.log(state)
   if (state === 'show') dmodel.css('display', 'block')
   else if (state === 'hide') dmodel.css('display', 'none')
-}
+} {% endcomment %}
 </script>
 {% endblock extra_body %} 
