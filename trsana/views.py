@@ -102,7 +102,8 @@ def add_student(request):
             grades.student = student
             grades.save()
             return redirect('student_detail', student.id)
-        return render(request, 'trsana/add_student.html', context=context)
+        else:
+            return render(request, 'trsana/add_student.html', context=context)
 
     return render(request, 'trsana/add_student.html', context=context)
 
