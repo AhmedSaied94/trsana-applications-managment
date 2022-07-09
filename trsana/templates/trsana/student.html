@@ -9,7 +9,8 @@
         <div class='d-flex flex-column'>
             <a href="{% url 'add-student' %}" class='btn btn-primary'>اضافة طالب جديد</a>
             <a href='{{ student.get_update_url }}' class='btn btn-success my-1'>تعديل بيانات الطالب</a>
-            <a href='{{ student.get_delete_url }}' class='btn btn-danger mb-1'>حذف بيانات الطالب</a>
+            {% comment %} <a href='{{ student.get_delete_url }}' class='btn btn-danger mb-1'>حذف بيانات الطالب</a> {% endcomment %}
+            <button class='btn btn-danger mb-1' onclick="delMod('show')" data-bs-toggle="modal" data-bs-target="#model-con">حذف الطالب</button>
             <button class='btn btn-warning' id='printBtn'>طباعة بيانات الطالب</button>
         </div>
     </div>
@@ -151,6 +152,24 @@
               </tr>
             </tbody>
           </table>
+            <div class="modal" id="model-con">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true"></span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p>هل انت متاكدة من رغبتك في حذف الطالب؟</p>
+                  </div>
+                  <div class="modal-footer">
+                    <a href='{{ student.get_delete_url }}' class="btn btn-danger">تاكيد الحذف</a>
+                    <button onclick="delMod('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
+                  </div>
+                </div>
+              </div>
+          </div>
     </div>
 </div>
 
@@ -159,5 +178,11 @@
 <script>
 var printBtn = document.getElementById('printBtn')
 printBtn.addEventListener('click', () => window.print())
+{% comment %} var dmodel = $('#model-con')
+var delMod = state => {
+  console.log(state)
+  if (state === 'show') dmodel.css('display', 'block')
+  else if (state === 'hide') dmodel.css('display', 'none')
+} {% endcomment %}
 </script>
 {% endblock extra_body %} 

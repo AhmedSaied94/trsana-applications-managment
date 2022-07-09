@@ -55,6 +55,9 @@
                 <option value="رقم الملف">رقم الملف</option>
             </select>
           </div>
+          <div class="form-group">
+            <input type="text" name='group' class="form-control" placeholder="رقم المجموعة" id="group">
+          </div>
           <input type="submit" class="btn btn-primary mx-3" value="تصفية">
     </form>
 </div>
@@ -75,7 +78,7 @@
                 <div class="card-body">
                 <a href="{{ student.get_absolute_url }}" class="btn btn-primary">عرض</a>
                 <a href="{{ student.get_update_url }}" class="btn btn-success">تعديل</a>
-                <a href="{{ student.get_delete_url }}" class="btn btn-danger">حذف</a>
+                {% comment %} <a href="{{ student.get_delete_url }}" class="btn btn-danger">حذف</a> {% endcomment %}
                 </div>
             </div>
         {% endfor %}   

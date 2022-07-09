@@ -64,9 +64,6 @@ def add_student(request):
         'title': 'طالب جديد',
         'url': 'add-student',
         'btn': 'اضافة طالب',
-        'student_form': student_form,
-        'committee_form': committee_form,
-        'grades_form': grades_form,
         'title': 'add'
     }
     if request.method == 'POST':
@@ -102,7 +99,17 @@ def add_student(request):
             grades.student = student
             grades.save()
             return redirect('student_detail', student.id)
-    return render(request, 'trsana/add_student.html', context=context)
+        else:
+            context['student_form'] = student_form
+            context['committee_form'] = committee_form
+            context['grades_form'] = grades_form
+
+            return render(request, 'trsana/add_student.html', context=context)
+    else:
+        context['student_form'] = student_form
+        context['committee_form'] = committee_form
+        context['grades_form'] = grades_form
+        return render(request, 'trsana/add_student.html', context=context)
 
 
 @login_required
@@ -174,7 +181,10 @@ def results(request):
 def delete_student(request, pk):
     if not request.user.is_staff:
         return render(request, 'trsana/403.html')
-    student = get_object_or_404(Student, pk=pk),
+    qs = Student.objects.filter(pk=pk)
+    if not qs.exists():
+        return render(request, 'trsana/404.html')
+    student = qs.first()
     student.delete()
     return redirect('students', 'students')
 
@@ -190,6 +200,8 @@ def students(request, temp):
     if request.GET.get('rel') and request.GET.get('rel') != 'الكل':
         rel = request.GET.get('rel')
         students = students.filter(rel=True if rel == 'تابع' else False)
+    if request.GET.get('group'):
+        students = students.filter(group=request.GET.get('group'))
     if request.GET.get('result') and request.GET.get('result') != 'الكل':
         students = [student for student in students if student.student_grades.result
                     == request.GET.get('result')]
