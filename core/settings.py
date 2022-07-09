@@ -30,7 +30,7 @@ DEBUG = True
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['DEV_KEY'] if DEBUG else os.environ['PROD_KEY']
 
-ALLOWED_HOSTS = ['localhost', '34.221.193.108']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
