@@ -38,7 +38,7 @@ class Student(models.Model):
     nationality = models.CharField(_("الجنسية"), max_length=50, default='مصري')
     junior_cert_year = models.CharField(
         _("سنة اتمام الشهادة الاعدادية"), max_length=50)
-    junior_cert_total = models.IntegerField(_("مجموع الشهادة الاعدادية"))
+    junior_cert_total = models.FloatField(_("مجموع الشهادة الاعدادية"))
     junior_cert_place = models.CharField(
         _("جهة صدور الشهادة الاعدادية"), max_length=50, null=True, choices=Birthplace.choices)
     guardian = models.CharField(_("اسم ولي الامر"), max_length=50)

@@ -190,6 +190,8 @@ def students(request, temp):
     if request.GET.get('rel') and request.GET.get('rel') != 'الكل':
         rel = request.GET.get('rel')
         students = students.filter(rel=True if rel == 'تابع' else False)
+    if request.GET.get('group'):
+        students = students.filter(group=request.GET.get('group'))
     if request.GET.get('result') and request.GET.get('result') != 'الكل':
         students = [student for student in students if student.student_grades.result
                     == request.GET.get('result')]
