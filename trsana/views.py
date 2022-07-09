@@ -174,7 +174,10 @@ def results(request):
 def delete_student(request, pk):
     if not request.user.is_staff:
         return render(request, 'trsana/403.html')
-    student = get_object_or_404(Student, pk=pk),
+    qs = Student.objects.filter(pk=pk)
+    if not qs.exists():
+        return render(request, 'trsana/404.html')
+    student = qs.first()
     student.delete()
     return redirect('students', 'students')
 
