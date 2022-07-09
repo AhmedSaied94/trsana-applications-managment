@@ -105,8 +105,11 @@ def add_student(request):
             context['grades_form'] = grades_form
 
             return render(request, 'trsana/add_student.html', context=context)
-
-    return render(request, 'trsana/add_student.html', context=context)
+    else:
+        context['student_form'] = student_form
+        context['committee_form'] = committee_form
+        context['grades_form'] = grades_form
+        return render(request, 'trsana/add_student.html', context=context)
 
 
 @login_required
