@@ -64,9 +64,6 @@ def add_student(request):
         'title': 'طالب جديد',
         'url': 'add-student',
         'btn': 'اضافة طالب',
-        'student_form': student_form,
-        'committee_form': committee_form,
-        'grades_form': grades_form,
         'title': 'add'
     }
     if request.method == 'POST':
@@ -103,6 +100,10 @@ def add_student(request):
             grades.save()
             return redirect('student_detail', student.id)
         else:
+            context['student_form'] = student_form
+            context['committee_form'] = committee_form
+            context['grades_form'] = grades_form
+
             return render(request, 'trsana/add_student.html', context=context)
 
     return render(request, 'trsana/add_student.html', context=context)
