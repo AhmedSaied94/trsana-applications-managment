@@ -25,7 +25,7 @@ class StudentForm(forms.ModelForm):
             attrs={'class': 'form-control', 'style': 'width:500px;'}), max_length=50, required=True)
         self.fields['junior_cert_year'] = forms.CharField(label='سنة اتمام الشهادة الاعدادية', widget=forms.NumberInput(
             attrs={'class': 'form-control', 'style': 'width:500px;'}), max_length=50, required=True)
-        self.fields['junior_cert_total'] = forms.CharField(label='مجموع الشهادة الاعدادية', widget=forms.NumberInput(
+        self.fields['junior_cert_total'] = forms.FloatField(label='مجموع الشهادة الاعدادية', widget=forms.NumberInput(
             attrs={'class': 'form-control', 'style': 'width:500px;'}), max_length=50, required=True)
         self.fields['junior_cert_place'] = forms.ChoiceField(label='جهة صدور الشهادة الاعدادية', widget=forms.Select(
             attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True, choices=Birthplace.choices)
