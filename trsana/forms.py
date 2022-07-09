@@ -27,6 +27,8 @@ class StudentForm(forms.ModelForm):
             attrs={'class': 'form-control', 'style': 'width:500px;'}), max_length=50, required=True)
         self.fields['junior_cert_total'] = forms.CharField(label='مجموع الشهادة الاعدادية', widget=forms.NumberInput(
             attrs={'class': 'form-control', 'style': 'width:500px;'}), max_length=50, required=True)
+        self.fields['junior_cert_place'] = forms.ChoiceField(label='جهة صدور الشهادة الاعدادية', widget=forms.Select(
+            attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True, choices=Birthplace.choices)
         self.fields['guardian'] = forms.CharField(label='اسم ولي الامر', widget=forms.TextInput(
             attrs={'class': 'form-control', 'style': 'width:500px;'}), max_length=50, required=True)
         self.fields['guardian_rel'] = forms.CharField(label='صلة قرابة ولي الامر', widget=forms.TextInput(
@@ -37,10 +39,15 @@ class StudentForm(forms.ModelForm):
             attrs={'class': 'form-control', 'style': 'width:500px;'}), max_length=50, required=True)
         self.fields['student_pic'] = forms.ImageField(
             label='صورة الطالب', widget=forms.FileInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
+        self.fields['rel'] = forms.BooleanField(label='تابع', widget=forms.CheckboxInput(
+            attrs={'class': 'form-control d-block'}), required=False)
+        self.fields['rel_to'] = forms.CharField(label='تابع لـ', widget=forms.TextInput(
+            attrs={'class': 'form-control', 'style': 'width:500px;'}), max_length=50, required=False)
 
     class Meta:
         model = Student
         fields = '__all__'
+        exclude = ('author',)
 
 
 class CommitteeForm(forms.ModelForm):
@@ -68,15 +75,20 @@ class StudentGradesForm(forms.ModelForm):
         super(StudentGradesForm, self).__init__(*args, **kwargs)
         self.fields['arabic'] = forms.IntegerField(
             label='درجة اللغة العربية', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
-        self.fields['math'] = forms.IntegerField(label='درجة الرياضيات',
-                                                 widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
+        self.fields['english'] = forms.IntegerField(
+            label='درجة اللغة الانجليزية', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
+        self.fields['math'] = forms.IntegerField(label='درجة الرياضيات', widget=forms.NumberInput(
+            attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
         self.fields['science'] = forms.IntegerField(
             label='درجة العلوم', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
         self.fields['social_studies'] = forms.IntegerField(
             label='درجة الدراسات الاجتماعية', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
         self.fields['computer'] = forms.IntegerField(
             label='درجة الحاسب الالي', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
+        self.fields['spelling'] = forms.IntegerField(
+            label='درجة الاملاء', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
 
     class Meta:
         model = StudentGrades
-        fields = ['arabic', 'math', 'science', 'social_studies', 'computer']
+        fields = ['arabic', 'math', 'science',
+                  'social_studies', 'computer', 'english', 'spelling']

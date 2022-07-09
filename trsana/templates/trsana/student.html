@@ -53,17 +53,26 @@
                 <td>{{ student.junior_cert_total }}</td>
               </tr>
               <tr class="">
+                <td>جهة صدور الشهادة الاعدادية</td>
+                <td>{{ student.junior_cert_place }}</td>
                 <td>اسم ولي الامر</td>
                 <td>{{ student.guardian }}</td>
-                <td>صلة قرابة ولي الامر</td>
-                <td>{{ student.guardian_rel }}</td>
               </tr>
               <tr class="table-light">
+                <td>صلة قرابة ولي الامر</td>
+                <td>{{ student.guardian_rel }}</td>
                 <td>رقم هاتف ولي الامر</td>
                 <td>{{ student.guardian_phone }}</td>
+              </tr>
+              <tr class="">
                 <td>الرقم القومي</td>
                 <td>{{ student.national_id }}</td>
-              </tr>
+              {% if student.rel %}
+                  <td>تابع لـ</td>
+                  <th>{{ student.rel_to }}</th>
+              {% endif %}
+            </tr>
+
             </tbody>
           </table>
     </div>
@@ -79,19 +88,25 @@
             <tbody>
               <tr class="table-light">
                 <td colspan='2'>تقييم رثيس اللجنة</td>
-                <td colspan='2'>{{ student.committee_eval.committee_chairman }}</td>
+                <td colspan='2'>{{ student.committee_eval.committee_chairman }}/5</td>
               </tr>
               <tr class="">
                 <td>تقييم العضو الاول</td>
-                <td>{{ student.committee_eval.first_member }}</td>
+                <td>{{ student.committee_eval.first_member }}/5</td>
                 <td>تقييم العضو الثاني</td>
-                <td>{{ student.committee_eval.second_member }}</td>
+                <td>{{ student.committee_eval.second_member }}/5</td>
               </tr>
               <tr class="table-light">
                 <td>تقييم العضو الثالث</td>
-                <td>{{ student.committee_eval.third_member }}</td>
+                <td>{{ student.committee_eval.third_member }}/5</td>
                 <td>تقييم العضو الرابع</td>
-                <td>{{ student.committee_eval.forth_member }}</td>
+                <td>{{ student.committee_eval.forth_member }}/5</td>
+              </tr>
+              <tr class="">
+                <td>التقييم النهائي</td>
+                <td>{{ student.committee_eval.total }}/25</td>
+                <td>النتيجة</td>
+                <td class="{% if student.committee_eval.result == 'لائق' %}text-success{% else %}text-danger{% endif %}">{{ student.committee_eval.result }}</td>
               </tr>
             </tbody>
           </table>
@@ -108,19 +123,31 @@
             <tbody>
               <tr class="table-light">
                 <td>اللغة العربية</td>
-                <td>{{ student.student_grades.arabic }}/10</td>
+                <td>{{ student.student_grades.arabic }}/5</td>
                 <td>الرياضيات</td>
-                <td>{{ student.student_grades.math }}/10</td>
+                <td>{{ student.student_grades.math }}/5</td>
               </tr>
               <tr class="">
                 <td>العلوم</td>
-                <td>{{ student.student_grades.science }}/10</td>
+                <td>{{ student.student_grades.science }}/5</td>
                 <td>الدراسات الاجتماعية</td>
-                <td>{{ student.student_grades.social_studies }}/10</td>
+                <td>{{ student.student_grades.social_studies }}/5</td>
               </tr>
               <tr class="table-light">
+                <td>اللغة الانجليزية</td>
+                <td>{{ student.student_grades.english }}/5</td>
+                <td>الاملاء</td>
+                <td>{{ student.student_grades.spelling }}/5</td>
+              </tr>
+              <tr class="">
                 <td colspan='2'>الحاسب الالي</td>
-                <td colspan='2'>{{ student.student_grades.computer }}/10</td>
+                <td colspan='2'>{{ student.student_grades.computer }}/5</td>
+              </tr>
+              <tr class="table-light">
+                <td>المجموع النهائي</td>
+                <td>{{ student.student_grades.total }}/35</td>
+                <td>النتيجة</td>
+                <td class="{% if student.student_grades.result == 'ناجح' %}text-success{% else %}text-danger{% endif %}">{{ student.student_grades.result }}</td>
               </tr>
             </tbody>
           </table>

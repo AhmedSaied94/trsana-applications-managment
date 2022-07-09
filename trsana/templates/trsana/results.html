@@ -44,24 +44,35 @@
     </div>
 
     <div>
-        <table class="table table-hover">
+        <table class="table table-hover text-center">
             <thead>
                 <tr>
-                    <th scope="col">اسم الطالب</th>
-                    <th scope="col">مجموع الدرجات المواد</th>
-                    <th scope="col">نتيجة تقييم المواد</th>
-                    <th scope="col">مجموع درجات اللجنة</th>
-                    <th scope="col">نتيجة تقييم الللجنة</th>
+                    <th scope="col">الرقم</th>
+                    <th scope="col">المجموعة</th>
+                    <th scope="col" style='min-width:250px;'>اسم الطالب</th>
+                    <th scope="col">المحافظة</th>
+                    <th scope="col" style='min-width:200px;'>تابع لـ</th>
+                    <th scope="col">مجموع الاعدادية</th>
+                    <th scope="col">درجات المواد</th>
+                    <th scope="col">تقييم المواد</th>
+                    <th scope="col">درجات اللجنة</th>
+                    <th scope="col">تقييم الللجنة</th>
                 </tr>
             </thead>
             <tbody>
                 {% if students|length > 0 %}
                     {% for student in students %}
-                        <tr class="{% if student.student_grades.result == 'ناجح' %} table-success {% else %} table-danger {% endif %}">
-                            <td><a style='color:inherit;' href="{{ student.get_absolute_url }}">{{ student.name }}</a></td>
-                            <td>{{ student.student_grades.total }}</td>
+                        <tr style='cursor:pointer;' onclick="studentPage({{student.id}})" class="{% if student.student_grades.result == 'ناجح' %} table-success {% else %} table-danger {% endif %}">
+                            <td>{{ student.file_no }}</td>
+                            <td>{{ student.group }}</td>
+                            <td>{{ student.name }}</td>
+                            <td>{{ student.birthplace }}</td>
+                            <td>{% if student.rel %}{{student.rel_to}}{% else %}{% endif %}</td>
+                            <td>{{ student.junior_cert_total }}</td>
+
+                            <td>{{ student.student_grades.total }}/35</td>
                             <td class="{% if student.student_grades.result == 'ناجح' %} text-success {% else %} text-danger {% endif %}">{{ student.student_grades.result }}</td>
-                            <td>{{ student.committee_eval.total }}</td>
+                            <td>{{ student.committee_eval.total }}/25</td>
                             <td class="{% if student.student_grades.result == 'ناجح' %} text-success {% else %} text-danger {% endif %}">{{ student.committee_eval.result }}</td>
                         </tr>
                     {% endfor %}
@@ -84,5 +95,8 @@
 <script>
 var printBtn = document.getElementById('printBtn')
 printBtn.addEventListener('click', () => window.print())
+var studentPage = id => {
+    window.location.href = `/student-detail/${id}/`
+}
 </script>
 {% endblock extra_body %} 

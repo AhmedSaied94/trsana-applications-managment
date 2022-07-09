@@ -79,6 +79,8 @@ def add_student(request):
         if student_form.is_valid() and committee_form.is_valid() and grades_form.is_valid():
             print('here')
             student = student_form.save()
+            student.author = request.user
+            student.save()
             committe_data = committee_form.cleaned_data
             grades_data = grades_form.cleaned_data
             committee_eval = CommitteeEvaluation()
@@ -95,6 +97,8 @@ def add_student(request):
             grades.science = grades_data['science']
             grades.social_studies = grades_data['social_studies']
             grades.computer = grades_data['computer']
+            grades.english = grades_data['english']
+            grades.spelling = grades_data['spelling']
             grades.student = student
             grades.save()
             return redirect('student_detail', student.id)
@@ -172,19 +176,24 @@ def delete_student(request, pk):
         return render(request, 'trsana/403.html')
     student = get_object_or_404(Student, pk=pk),
     student.delete()
-    return redirect('students')
+    return redirect('students', 'students')
 
 
 @login_required
-def students(request):
+def students(request, temp):
+    template = 'trsana/students.html' if temp == 'cards' else 'trsana/students_table.html'
     if not request.user.is_staff:
         return render(request, 'trsana/403.html')
     students = Student.objects.all()
     if request.GET.get('city') and request.GET.get('city') != 'الكل':
         students = students.filter(birthplace=request.GET.get('city'))
+    if request.GET.get('rel') and request.GET.get('rel') != 'الكل':
+        rel = request.GET.get('rel')
+        students = students.filter(rel=True if rel == 'تابع' else False)
     if request.GET.get('result') and request.GET.get('result') != 'الكل':
         students = [student for student in students if student.student_grades.result
                     == request.GET.get('result')]
+
     if request.GET.get('sort') and request.GET.get('sort') != 'بدون':
         sort = request.GET.get('sort')
         if type(students) is not list:
@@ -202,7 +211,7 @@ def students(request):
     if request.GET.get('search') and request.GET.get('search') != '':
         students = students.filter(name__startswith=request.GET.get('search'))
 
-    return render(request, 'trsana/students.html', context={'students': students, 'title': 'students'})
+    return render(request, template, context={'students': students, 'title': 'students' if temp == 'cards' else 'students_table'})
 
 
 def home(request):

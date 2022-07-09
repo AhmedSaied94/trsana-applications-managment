@@ -12,7 +12,7 @@
 {% endblock extra_head %}
 {% block main %}
 <div style='direction:rtl;'>
-    <form class='d-flex py-5' action="{% url 'students' %}" method='GET' enctype="multipart/form-data">
+    <form class='d-flex py-5' action="{% url 'students' 'cards' %}" method='GET' enctype="multipart/form-data">
         <div class="form-group ms-3">
             <select name='city' class="form-select" id="city">
                 <option value="" disabled selected>اختر محافظة</option>
@@ -34,7 +34,14 @@
                 <option value="الكل">الكل</option>
                 <option value="ناجح">ناجح</option>
                 <option value="راسب">راسب</option>
-
+            </select>
+          </div>
+          <div class='form-group mx-3'>
+            <select name='rel' class="form-select" id="rel">
+            <option value="" disabled selected>تابع؟</option>
+            <option value="الكل">الكل</option>
+            <option value="تابع">تابع</option>
+            <option value="بدون">بدون</option>
             </select>
           </div>
           <div class="form-group mx-3">

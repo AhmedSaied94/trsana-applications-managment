@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
 # Create your models here.
 
 
@@ -38,6 +39,8 @@ class Student(models.Model):
     junior_cert_year = models.CharField(
         _("سنة اتمام الشهادة الاعدادية"), max_length=50)
     junior_cert_total = models.IntegerField(_("مجموع الشهادة الاعدادية"))
+    junior_cert_place = models.CharField(
+        _("جهة صدور الشهادة الاعدادية"), max_length=50, null=True, choices=Birthplace.choices)
     guardian = models.CharField(_("اسم ولي الامر"), max_length=50)
     guardian_rel = models.CharField(_("صلة قرابة ولي الامر"), max_length=50)
     guardian_phone = models.CharField(
@@ -46,6 +49,11 @@ class Student(models.Model):
         _("الرقم القومي"), max_length=50, unique=True)
     student_pic = models.ImageField(
         _("صورة الطالب"), upload_to='students', unique=True)
+    rel = models.BooleanField(_("تابع"), default=False)
+    rel_to = models.CharField(
+        _("اسم التابع"), max_length=50, null=True, blank=True)
+    author = models.ForeignKey(
+        settings.AUTH_USER_MODEL, verbose_name=_("المحرر"), on_delete=models.SET_NULL, null=True)
 
     class Meta:
         verbose_name = _("الطالب")
@@ -79,10 +87,10 @@ class CommitteeEvaluation(models.Model):
 
     @property
     def result(self):
-        if self.total >= 25:
-            return 'ناجح'
+        if self.total >= 12.5:
+            return 'لائق'
         else:
-            return 'راسب'
+            return 'غير لائق'
 
     class Meta:
         verbose_name = _("تقييم اللجنة")
@@ -100,18 +108,20 @@ class StudentGrades(models.Model):
     student = models.OneToOneField("Student", verbose_name=_(
         "درجات الطالب"), related_name='student_grades', on_delete=models.CASCADE)
     arabic = models.IntegerField(_("اللغة العربية"))
+    english = models.IntegerField(_("اللغة الانجليزية"))
     math = models.IntegerField(_("الرياضيات"))
     science = models.IntegerField(_("العلوم"))
     social_studies = models.IntegerField(_("الدراسات الاجتماعية"))
     computer = models.IntegerField(_("الحاسب الالي"))
+    spelling = models.IntegerField(_("املاء"))
 
     @property
     def total(self):
-        return self.arabic + self.math + self.science + self.social_studies + self.computer
+        return self.arabic + self.math + self.science + self.social_studies + self.computer + self.english + self.spelling
 
     @property
     def result(self):
-        if self.total >= 25:
+        if self.total >= 17.5:
             return 'ناجح'
         else:
             return 'راسب'

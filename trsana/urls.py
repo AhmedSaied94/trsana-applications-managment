@@ -6,7 +6,7 @@ urlpatterns = [
     path('student-detail/<int:pk>/', student_detail, name='student_detail'),
     path('results/', results, name='results'),
     path('delete-student/<int:pk>/', delete_student, name='delete-student'),
-    path('students/', students, name='students'),
+    path('students/<str:temp>/', students, name='students'),
     path('', home, name='home'),
     path('about/', about, name='about')
 ]
