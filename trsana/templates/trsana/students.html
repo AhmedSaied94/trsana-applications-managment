@@ -78,7 +78,7 @@
                 <div class="card-body">
                 <a href="{{ student.get_absolute_url }}" class="btn btn-primary">عرض</a>
                 <a href="{{ student.get_update_url }}" class="btn btn-success">تعديل</a>
-                <a href="{{ student.get_delete_url }}" class="btn btn-danger">حذف</a>
+                {% comment %} <a href="{{ student.get_delete_url }}" class="btn btn-danger">حذف</a> {% endcomment %}
                 </div>
             </div>
         {% endfor %}   
