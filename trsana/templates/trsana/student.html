@@ -164,8 +164,8 @@
                     <p>هل انت متاكدة من رغبتك في حذف الطالب؟</p>
                   </div>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button onclick="delMod('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a href='{{ student.get_delete_url }}' class="btn btn-danger">تاكيد الحذف</a>
+                    <button onclick="delMod('hide')" type="button" class="btn btn-secondary" data-bs-dismiss="modal">الغاء</button>
                   </div>
                 </div>
               </div>
