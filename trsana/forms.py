@@ -40,9 +40,9 @@ class StudentForm(forms.ModelForm):
         self.fields['student_pic'] = forms.ImageField(
             label='صورة الطالب', widget=forms.FileInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
         self.fields['rel'] = forms.BooleanField(label='تابع', widget=forms.CheckboxInput(
-            attrs={'class': 'form-control d-block'}), required=False)
+            attrs={'class': 'form-control d-block', 'id': 'relChk'}), required=False)
         self.fields['rel_to'] = forms.CharField(label='تابع لـ', widget=forms.TextInput(
-            attrs={'class': 'form-control', 'style': 'width:500px;'}), max_length=50, required=False)
+            attrs={'class': 'form-control', 'style': 'width:500px;', 'id': 'relName', 'disabled': True}), max_length=50, required=False)
 
     class Meta:
         model = Student
