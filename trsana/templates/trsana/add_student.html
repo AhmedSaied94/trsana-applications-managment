@@ -43,3 +43,16 @@
 </div>
 
 {% endblock %}
+{% block extra_body %}
+
+<script>
+  var relChk = $('#relChk')
+  var relName = $('#relName')
+
+  var relChange = () => {
+    if (relChk.val() === true) relName.attr('disabled', false)
+    else relName.attr('disabled', true)
+  }
+</script>
+
+{% endblock extra_body %}
