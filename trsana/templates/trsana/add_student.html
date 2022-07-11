@@ -48,6 +48,9 @@
 <script>
   var relChk = $('#relChk')
   var relName = $('#relName')
+  $(()=>{
+    if (document.getElementById('relChk').checked === true) relName.attr('disabled', false)
+  })
   relChk.click(()=>{
     console.log(document.getElementById('relChk').checked)
     if (document.getElementById('relChk').checked === true) relName.attr('disabled', false)
