@@ -161,7 +161,7 @@ def student_detail(request, pk):
 def results(request):
     if not request.user.is_staff:
         return render(request, 'trsana/403.html')
-    students = Student.objects.all()
+    students = Student.objects.all().order_by('file_no')
     cities = [st.birthplace for st in students]
     if request.GET.get('city') and request.GET.get('city') != 'الكل':
         students = students.filter(birthplace=request.GET.get('city'))
@@ -208,7 +208,7 @@ def students(request, temp):
     template = 'trsana/students.html' if temp == 'cards' else 'trsana/students_table.html'
     if not request.user.is_staff:
         return render(request, 'trsana/403.html')
-    students = Student.objects.all()
+    students = Student.objects.all().order_by('file_no')
     cities = [st.birthplace for st in students]
 
     if request.GET.get('city') and request.GET.get('city') != 'الكل':
