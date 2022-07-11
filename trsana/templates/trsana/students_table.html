@@ -10,7 +10,7 @@
                 <select name='city' class="form-select" id="city">
                     <option value="" disabled selected>اختر محافظة</option>
                     <option value="الكل">الكل</option>
-                    <option value="الاسكندرية">الاسكندرية</option>
+                    {% comment %} <option value="الاسكندرية">الاسكندرية</option>
                     <option value="البحيرة">البحيرة</option>
                     <option value="كفرالشيخ">كفر الشيخ</option>
                     <option value="الشرقية">الشرقية</option>
@@ -18,7 +18,10 @@
                     <option value="المنوفية">المنوفية</option>
                     <option value="الدقهلية">الدقهلية</option>
                     <option value="القليوبية">القليوبية</option>
-                    <option value="دمياط">دمياط</option>
+                    <option value="دمياط">دمياط</option> {% endcomment %}
+                    {% for city in cities %}
+                      <option value="{{ city }}">{{ city }}</option>
+                    {% endfor %}
                 </select>
               </div>
               <div class="form-group mx-3">

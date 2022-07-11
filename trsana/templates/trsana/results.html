@@ -8,7 +8,7 @@
                 <select name='city' class="form-select" id="city">
                     <option value="" disabled selected>اختر محافظة</option>
                     <option value="الكل">الكل</option>
-                    <option value="الاسكندرية">الاسكندرية</option>
+                    {% comment %} <option value="الاسكندرية">الاسكندرية</option>
                     <option value="البحيرة">البحيرة</option>
                     <option value="كفرالشيخ">كفر الشيخ</option>
                     <option value="الشرقية">الشرقية</option>
@@ -16,7 +16,10 @@
                     <option value="المنوفية">المنوفية</option>
                     <option value="الدقهلية">الدقهلية</option>
                     <option value="القليوبية">القليوبية</option>
-                    <option value="دمياط">دمياط</option>
+                    <option value="دمياط">دمياط</option> {% endcomment %}
+                    {% for city in cities %}
+                        <option value="{{ city }}">{{ city }}</option>
+                    {% endfor %}
                 </select>
               </div>
               <div class="form-group mx-3">
@@ -25,7 +28,14 @@
                     <option value="الكل">الكل</option>
                     <option value="ناجح">ناجح</option>
                     <option value="راسب">راسب</option>
-    
+                </select>
+              </div>
+              <div class='form-group mx-3'>
+                <select name='rel' class="form-select" id="rel">
+                <option value="" disabled selected>تابع؟</option>
+                <option value="الكل">الكل</option>
+                <option value="تابع">تابع</option>
+                <option value="بدون">بدون</option>
                 </select>
               </div>
               <div class="form-group mx-3">
@@ -36,7 +46,11 @@
                     <option value="الاقل درجات">الاقل درجات</option>
                     <option value="ا - ي">ا - ي</option>
                     <option value="ي - ا">ي - ا</option>
+                    <option value="رقم الملف">رقم الملف</option>
                 </select>
+              </div>
+              <div class="form-group">
+                <input type="text" name='group' class="form-control" placeholder="رقم المجموعة" id="group">
               </div>
               <input type="submit" class="btn btn-primary mx-3" value="تصفية">
         </form>

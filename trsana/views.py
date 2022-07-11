@@ -124,9 +124,6 @@ def update_student(request, pk):
         'title': 'تعديل طالب',
         'url': student.id,
         'btn': 'تعديل الطالب',
-        'student_form': student_form,
-        'committee_form': committee_form,
-        'grades_form': grades_form
     }
     if request.method == 'POST':
         student_form = StudentForm(
@@ -140,7 +137,16 @@ def update_student(request, pk):
             committee_form.save()
             grades_form.save()
             return redirect('student_detail', student.id)
-    return render(request, 'trsana/add_student.html', context=context)
+        else:
+            context['student_form'] = student_form
+            context['committee_form'] = committee_form
+            context['grades_form'] = grades_form
+            return render(request, 'trsana/add_student.html', context=context)
+    else:
+        context['student_form'] = student_form
+        context['committee_form'] = committee_form
+        context['grades_form'] = grades_form
+        return render(request, 'trsana/add_student.html', context=context)
 
 
 @login_required
@@ -156,8 +162,14 @@ def results(request):
     if not request.user.is_staff:
         return render(request, 'trsana/403.html')
     students = Student.objects.all()
+    cites = [st.bitrhplace for st in students]
     if request.GET.get('city') and request.GET.get('city') != 'الكل':
         students = students.filter(birthplace=request.GET.get('city'))
+    if request.GET.get('rel') and request.GET.get('rel') != 'الكل':
+        rel = request.GET.get('rel')
+        students = students.filter(rel=True if rel == 'تابع' else False)
+    if request.GET.get('group'):
+        students = students.filter(group=request.GET.get('group'))
     if request.GET.get('result') and request.GET.get('result') != 'الكل':
         students = [student for student in students if student.student_grades.result
                     == request.GET.get('result')]
@@ -173,8 +185,10 @@ def results(request):
             students.sort(key=lambda x: x.name)
         elif sort == 'ي - ا':
             students.sort(key=lambda x: x.name, reverse=True)
+        elif sort == 'رقم الملف':
+            students.sort(key=lambda x: x.file_no)
 
-    return render(request, 'trsana/results.html', context={'students': students, 'title': 'results'})
+    return render(request, 'trsana/results.html', context={'students': students, 'title': 'results', 'cites': list(set(cites))})
 
 
 @login_required
@@ -195,6 +209,8 @@ def students(request, temp):
     if not request.user.is_staff:
         return render(request, 'trsana/403.html')
     students = Student.objects.all()
+    cites = [st.bitrhplace for st in students]
+
     if request.GET.get('city') and request.GET.get('city') != 'الكل':
         students = students.filter(birthplace=request.GET.get('city'))
     if request.GET.get('rel') and request.GET.get('rel') != 'الكل':
@@ -223,7 +239,12 @@ def students(request, temp):
     if request.GET.get('search') and request.GET.get('search') != '':
         students = students.filter(name__startswith=request.GET.get('search'))
 
-    return render(request, template, context={'students': students, 'title': 'students' if temp == 'cards' else 'students_table'})
+    return render(request, template,
+                  context={
+                      'students': students,
+                      'title': 'students' if temp == 'cards' else 'students_table',
+                      'cites': list(set(cites))
+                  })
 
 
 def home(request):
