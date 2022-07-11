@@ -64,7 +64,7 @@ def add_student(request):
         'title': 'طالب جديد',
         'url': 'add-student',
         'btn': 'اضافة طالب',
-        'title': 'add'
+        'title': 'اضافة طالب'
     }
     if request.method == 'POST':
         student_form = StudentForm(data=request.POST, files=request.FILES)
