@@ -162,7 +162,7 @@ def results(request):
     if not request.user.is_staff:
         return render(request, 'trsana/403.html')
     students = Student.objects.all()
-    cites = [st.bitrhplace for st in students]
+    cites = [st.birthplace for st in students]
     if request.GET.get('city') and request.GET.get('city') != 'الكل':
         students = students.filter(birthplace=request.GET.get('city'))
     if request.GET.get('rel') and request.GET.get('rel') != 'الكل':
@@ -209,7 +209,7 @@ def students(request, temp):
     if not request.user.is_staff:
         return render(request, 'trsana/403.html')
     students = Student.objects.all()
-    cites = [st.bitrhplace for st in students]
+    cites = [st.birthplace for st in students]
 
     if request.GET.get('city') and request.GET.get('city') != 'الكل':
         students = students.filter(birthplace=request.GET.get('city'))
