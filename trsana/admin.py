@@ -3,7 +3,46 @@ from .models import Student, CommitteeEvaluation, StudentGrades
 from import_export import resources
 from import_export.admin import ImportExportMixin, ImportExportModelAdmin
 from import_export.fields import Field
+from django.urls import reverse
+from django.utils.html import format_html
+from django.contrib.admin import SimpleListFilter
+from django.db.models import Sum, F
+from django.db import models
 # Register your models here.
+
+
+class ResultFilter(SimpleListFilter):
+
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = 'النتيجة'
+
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'result'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('ناجح', 'ناجح'),
+            ('راسب', 'راسب')
+        )
+
+    def queryset(self, request, queryset):
+        students = queryset.annotate(total=Sum(
+            F('student_grades__arabic') +
+            F('student_grades__math') +
+            F('student_grades__science') +
+            F('student_grades__social_studies') +
+            F('student_grades__english') +
+            F('student_grades__spelling') +
+            F('student_grades__computer'),
+            output_field=models.FloatField()
+        ))
+        if self.value() == 'ناجح':
+            # If is_paid=True filter is activated
+            return students.filter(total__gte=17.5)
+        if self.value() == 'راسب':
+            # If is_paid=True filter is activated
+            return students.filter(total__lt=17.5)
 
 
 class StudentResource(resources.ModelResource):
@@ -57,6 +96,13 @@ class StudentGradesAdmin(admin.ModelAdmin, ImportExportMixin):
 
 class StudentAdmin(ImportExportModelAdmin):
     resource_class = StudentResource
+    list_display = ('name', 'file_no', 'group', 'birthdate',
+                    'address', 'junior_cert_total', 'rel_to', 'get_author')
+    list_filter = ('birthplace', ResultFilter, 'rel', 'group')
+
+    def get_author(self, obj):
+        return format_html('<a href="{}{}/change/">{}</a>', reverse('admin:custom_account_userprofile_changelist'), obj.author.id, obj.author.username)
+    get_author.short_description = 'author'
 
 
 admin.site.register(Student, StudentAdmin)

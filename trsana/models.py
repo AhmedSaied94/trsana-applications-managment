@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
+
 # Create your models here.
 
 
@@ -71,7 +72,7 @@ class Student(models.Model):
     rel_to = models.CharField(
         _("اسم التابع"), max_length=50, null=True, blank=True)
     author = models.ForeignKey(
-        settings.AUTH_USER_MODEL, verbose_name=_("المحرر"), on_delete=models.SET_NULL, null=True)
+        settings.AUTH_USER_MODEL, verbose_name=_("المحرر"), on_delete=models.SET_NULL, null=True, related_name='author')
 
     class Meta:
         verbose_name = _("الطالب")
