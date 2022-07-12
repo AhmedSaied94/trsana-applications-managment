@@ -163,6 +163,7 @@ def results(request):
         return render(request, 'trsana/403.html')
     students = Student.objects.all().order_by('file_no')
     cities = [st.birthplace for st in students]
+    groups = [st.group for st in students]
     if request.GET.get('city') and request.GET.get('city') != 'الكل':
         students = students.filter(birthplace=request.GET.get('city'))
     if request.GET.get('rel') and request.GET.get('rel') != 'الكل':
@@ -188,7 +189,12 @@ def results(request):
         elif sort == 'رقم الملف':
             students.sort(key=lambda x: x.file_no)
 
-    return render(request, 'trsana/results.html', context={'students': students, 'title': 'results', 'cities': list(set(cities))})
+    return render(request, 'trsana/results.html', context={
+        'students': students,
+        'title': 'results',
+        'cities': list(set(cities)),
+        'groups': list(set(groups))
+    })
 
 
 @login_required
@@ -210,7 +216,7 @@ def students(request, temp):
         return render(request, 'trsana/403.html')
     students = Student.objects.all().order_by('file_no')
     cities = [st.birthplace for st in students]
-
+    groups = [st.group for st in students]
     if request.GET.get('city') and request.GET.get('city') != 'الكل':
         students = students.filter(birthplace=request.GET.get('city'))
     if request.GET.get('rel') and request.GET.get('rel') != 'الكل':
@@ -243,7 +249,8 @@ def students(request, temp):
                   context={
                       'students': students,
                       'title': 'students' if temp == 'cards' else 'students_table',
-                      'cities': list(set(cities))
+                      'cities': list(set(cities)),
+                      'groups': list(set(groups))
                   })
 
 

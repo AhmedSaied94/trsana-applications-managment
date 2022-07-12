@@ -17,16 +17,7 @@
             <select name='city' class="form-select" id="city">
                 <option value="" disabled selected>اختر محافظة</option>
                 <option value="الكل">الكل</option>
-                {% comment %} <option value="الاسكندرية">الاسكندرية</option>
-                <option value="البحيرة">البحيرة</option>
-                <option value="كفرالشيخ">كفر الشيخ</option>
-                <option value="الشرقية">الشرقية</option>
-                <option value="الغربية">الغربية</option>
-                <option value="المنوفية">المنوفية</option>
-                <option value="الدقهلية">الدقهلية</option>
-                <option value="القليوبية">القليوبية</option>
-                <option value="دمياط">دمياط</option> {% endcomment %}
-                {% for city in cities %}
+                    {% for city in cities %}
                     <option value="{{ city }}">{{ city }}</option>
                 {% endfor %}
             </select>
@@ -59,7 +50,14 @@
             </select>
           </div>
           <div class="form-group">
-            <input type="text" name='group' class="form-control" placeholder="رقم المجموعة" id="group">
+            {% comment %} <input type="text" name='group' class="form-control" placeholder="رقم المجموعة" id="group"> {% endcomment %}
+            <select name='group' class="form-select" id="group">
+                <option value="" disabled selected>اختر مجموعة</option>
+                <option value="الكل">الكل</option>
+                    {% for group in groups %}
+                    <option value="{{ group }}">{{ group }}</option>
+                {% endfor %}
+            </select>
           </div>
           <input type="submit" class="btn btn-primary mx-3" value="تصفية">
     </form>

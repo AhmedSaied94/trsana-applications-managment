@@ -50,8 +50,14 @@
                 </select>
               </div>
               <div class="form-group">
-                <input type="text" name='group' class="form-control" placeholder="رقم المجموعة" id="group">
-              </div>
+                {% comment %} <input type="text" name='group' class="form-control" placeholder="رقم المجموعة" id="group"> {% endcomment %}
+                <select name='group' class="form-select" id="group">
+                  <option value="" disabled selected>اختر مجموعة</option>
+                  <option value="الكل">الكل</option>
+                      {% for group in groups %}
+                      <option value="{{ group }}">{{ group }}</option>
+                  {% endfor %}
+                </select>              </div>
               <input type="submit" class="btn btn-primary mx-3" value="تصفية">
         </form>
         <button class='btn btn-warning px-4' id='printBtn'>طباعة</button>
