@@ -193,7 +193,7 @@ def results(request):
         'students': students,
         'title': 'results',
         'cities': list(set(cities)),
-        'groups': sorted(list(set(groups)))
+        'groups': list(set(groups)).sort()
     })
 
 
@@ -250,7 +250,7 @@ def students(request, temp):
                       'students': students,
                       'title': 'students' if temp == 'cards' else 'students_table',
                       'cities': list(set(cities)),
-                      'groups': sorted(list(set(groups)))
+                      'groups': list(set(groups)).sort()
                   })
 
 
