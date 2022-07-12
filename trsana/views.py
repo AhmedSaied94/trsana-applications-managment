@@ -216,7 +216,7 @@ def students(request, temp):
         return render(request, 'trsana/403.html')
     students = Student.objects.all().order_by('file_no')
     cities = [st.birthplace for st in students]
-    groups = [st.group for st in students]
+    groups = [st.group for st in students].sort()
     if request.GET.get('city') and request.GET.get('city') != 'الكل':
         students = students.filter(birthplace=request.GET.get('city'))
     if request.GET.get('rel') and request.GET.get('rel') != 'الكل':
