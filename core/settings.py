@@ -55,7 +55,6 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'gunicorn',
     'import_export',
-    'django_property_filter',
 
     'allauth',
     'allauth.account',
