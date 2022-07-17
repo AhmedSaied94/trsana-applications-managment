@@ -54,11 +54,11 @@ class StudentResource(resources.ModelResource):
 
         fields = ('id', 'name', 'file_no', 'group', 'batch', 'birthplace', 'address', 'birthdate', 'religion',
                         'nationality', 'junior_cert_year', 'junior_cert_total', 'guardian', 'guardian_rel', 'guardian_phone', 'national_id',
-                        'grades_total', 'evaluation_total')
+                        'rel_to', 'grades_total', 'evaluation_total')
 
         export_order = ('id', 'name', 'file_no', 'group', 'batch', 'birthplace', 'address', 'birthdate', 'religion',
                         'nationality', 'junior_cert_year', 'junior_cert_total', 'guardian', 'guardian_rel', 'guardian_phone', 'national_id',
-                        'grades_total', 'evaluation_total')
+                        'rel_to', 'grades_total', 'evaluation_total')
 
     def dehydrate_grades_total(self, obj):
         total = str(round(obj.student_grades.total / 50 * 100)) + '%'
