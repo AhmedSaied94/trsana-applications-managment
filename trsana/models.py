@@ -94,11 +94,11 @@ class Student(models.Model):
 class CommitteeEvaluation(models.Model):
     student = models.OneToOneField(
         "Student", verbose_name=_("الطالب"), on_delete=models.CASCADE, related_name='committee_eval')
-    committee_chairman = models.IntegerField(_("رئيس اللجنة"))
-    first_member = models.IntegerField(_("العضو الاول"))
-    second_member = models.IntegerField(_("العضو الثاني"))
-    third_member = models.IntegerField(_("العضو الثالث"))
-    forth_member = models.IntegerField(_("العضو الرابع"))
+    committee_chairman = models.FloatField(_("رئيس اللجنة"))
+    first_member = models.FloatField(_("العضو الاول"))
+    second_member = models.FloatField(_("العضو الثاني"))
+    third_member = models.FloatField(_("العضو الثالث"))
+    forth_member = models.FloatField(_("العضو الرابع"))
 
     @property
     def total(self):
@@ -126,13 +126,13 @@ class StudentGrades(models.Model):
 
     student = models.OneToOneField("Student", verbose_name=_(
         "درجات الطالب"), related_name='student_grades', on_delete=models.CASCADE)
-    arabic = models.IntegerField(_("اللغة العربية"))
-    english = models.IntegerField(_("اللغة الانجليزية"))
-    math = models.IntegerField(_("الرياضيات"))
-    science = models.IntegerField(_("العلوم"))
-    social_studies = models.IntegerField(_("الدراسات الاجتماعية"))
-    computer = models.IntegerField(_("الحاسب الالي"))
-    spelling = models.IntegerField(_("املاء"))
+    arabic = models.FloatField(_("اللغة العربية"))
+    english = models.FloatField(_("اللغة الانجليزية"))
+    math = models.FloatField(_("الرياضيات"))
+    science = models.FloatField(_("العلوم"))
+    social_studies = models.FloatField(_("الدراسات الاجتماعية"))
+    computer = models.FloatField(_("الحاسب الالي"))
+    spelling = models.FloatField(_("املاء"))
 
     @property
     def total(self):

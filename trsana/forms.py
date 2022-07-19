@@ -53,15 +53,15 @@ class StudentForm(forms.ModelForm):
 class CommitteeForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CommitteeForm, self).__init__(*args, **kwargs)
-        self.fields['committee_chairman'] = forms.IntegerField(
+        self.fields['committee_chairman'] = forms.FloatField(
             label='تقييم رئيس اللجنة', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
-        self.fields['first_member'] = forms.IntegerField(
+        self.fields['first_member'] = forms.FloatField(
             label='تقييم العضو الاول', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
-        self.fields['second_member'] = forms.IntegerField(
+        self.fields['second_member'] = forms.FloatField(
             label='تقييم العضو الثاني', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
-        self.fields['third_member'] = forms.IntegerField(
+        self.fields['third_member'] = forms.FloatField(
             label='تقييم العضو الثالث', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
-        self.fields['forth_member'] = forms.IntegerField(
+        self.fields['forth_member'] = forms.FloatField(
             label='تقييم العضو الرابع', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
 
     class Meta:
@@ -73,19 +73,19 @@ class CommitteeForm(forms.ModelForm):
 class StudentGradesForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(StudentGradesForm, self).__init__(*args, **kwargs)
-        self.fields['arabic'] = forms.IntegerField(
+        self.fields['arabic'] = forms.FloatField(
             label='درجة اللغة العربية', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
-        self.fields['english'] = forms.IntegerField(
+        self.fields['english'] = forms.FloatField(
             label='درجة اللغة الانجليزية', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
-        self.fields['math'] = forms.IntegerField(label='درجة الرياضيات', widget=forms.NumberInput(
+        self.fields['math'] = forms.FloatField(label='درجة الرياضيات', widget=forms.NumberInput(
             attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
-        self.fields['science'] = forms.IntegerField(
+        self.fields['science'] = forms.FloatField(
             label='درجة العلوم', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
-        self.fields['social_studies'] = forms.IntegerField(
+        self.fields['social_studies'] = forms.FloatField(
             label='درجة الدراسات الاجتماعية', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
-        self.fields['computer'] = forms.IntegerField(
+        self.fields['computer'] = forms.FloatField(
             label='درجة الحاسب الالي', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
-        self.fields['spelling'] = forms.IntegerField(
+        self.fields['spelling'] = forms.FloatField(
             label='درجة الاملاء', widget=forms.NumberInput(attrs={'class': 'form-control', 'style': 'width:500px;'}), required=True)
 
     class Meta:
