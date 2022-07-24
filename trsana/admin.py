@@ -98,7 +98,7 @@ class StudentAdmin(ImportExportModelAdmin):
     resource_class = StudentResource
     list_display = ('name', 'file_no', 'group', 'birthdate',
                     'address', 'junior_cert_total', 'rel_to', 'get_author')
-    list_filter = ('birthplace', ResultFilter, 'rel', 'group', 'religion')
+    list_filter = ('birthplace', ResultFilter, 'rel', 'group', 'religion', 'not_attend')
 
     def get_author(self, obj):
         return format_html('<a href="{}{}/change/">{}</a>', reverse('admin:custom_account_userprofile_changelist'), obj.author.id, obj.author.username)

@@ -73,6 +73,7 @@ class Student(models.Model):
         _("اسم التابع"), max_length=50, null=True, blank=True)
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, verbose_name=_("المحرر"), on_delete=models.SET_NULL, null=True, related_name='author')
+    not_attend = models.BooleanField(_("لم يحضر"), default=False)
 
     class Meta:
         verbose_name = _("الطالب")

@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "69d81922f804e5cb52cadbb1632a1677db5ddec0abc177aaa87d4c7bab150fc3"
+            "sha256": "b00f76fc9492af7ab488bf04857abac03258d88a188a51210f7fac30ea519d75"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.8"
+            "python_version": "3.10"
         },
         "sources": [
             {
@@ -193,10 +193,10 @@
         },
         "django-colorfield": {
             "hashes": [
-                "sha256:08d093d5b31b599b681665ab97b957045c4a4c0b93cfc434bd257378a7193c96",
-                "sha256:a58d1c5a56f0380439dc1305a131321b839df35ddfac2a6dbcc887de02232120"
+                "sha256:29dffa09b2ce89f19504a53a120e5bfdbfe3e44621f33b3f94b0e6a572ae93c1",
+                "sha256:9c2c36a7cac60bf6e57e70ca344529a3065226543358d01036e1714371f3166d"
             ],
-            "version": "==0.7.1"
+            "version": "==0.7.2"
         },
         "django-cors-headers": {
             "hashes": [
@@ -505,11 +505,11 @@
         },
         "setuptools": {
             "hashes": [
-                "sha256:16923d366ced322712c71ccb97164d07472abeecd13f3a6c283f6d5d26722793",
-                "sha256:db3b8e2f922b2a910a29804776c643ea609badb6a32c4bcc226fd4fd902cce65"
+                "sha256:0d33c374d41c7863419fc8f6c10bfe25b7b498aa34164d135c622e52580c6b16",
+                "sha256:c04b44a57a6265fe34a4a444e965884716d34bae963119a76353434d6f18e450"
             ],
             "markers": "python_version >= '3.7'",
-            "version": "==63.1.0"
+            "version": "==63.2.0"
         },
         "six": {
             "hashes": [
@@ -541,6 +541,14 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==3.2.1"
+        },
+        "tzdata": {
+            "hashes": [
+                "sha256:238e70234214138ed7b4e8a0fab0e5e13872edab3be586ab8198c407620e2ab9",
+                "sha256:8b536a8ec63dc0751342b3984193a3118f8fca2afe25752bb9b7fffd398552d3"
+            ],
+            "index": "pypi",
+            "version": "==2022.1"
         },
         "urllib3": {
             "hashes": [

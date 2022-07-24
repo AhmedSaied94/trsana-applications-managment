@@ -49,7 +49,7 @@
                     <option value="رقم الملف">رقم الملف</option>
                 </select>
               </div>
-              <div class="form-group">
+              <div class="form-group mx-3">
                 {% comment %} <input type="text" name='group' class="form-control" placeholder="رقم المجموعة" id="group"> {% endcomment %}
                 <select name='group' class="form-select" id="group">
                     <option value="" disabled selected>اختر مجموعة</option>
@@ -57,6 +57,15 @@
                         {% for group in groups %}
                         <option value="{{ group }}">{{ group }}</option>
                     {% endfor %}
+                </select>
+              </div>
+              <div class="form-group mx-3">
+                {% comment %} <input type="text" name='group' class="form-control" placeholder="رقم المجموعة" id="group"> {% endcomment %}
+                <select name='attend' class="form-select" id="attend">
+                    <option value="" disabled selected>الحالة</option>
+                    <option value="الكل">الكل</option>
+                    <option value="حضر">حضر</option>
+                    <option value="لم يحضر">لم يحضر</option>
                 </select>
               </div>
               <input type="submit" class="btn btn-primary mx-3" value="تصفية">
@@ -83,18 +92,23 @@
             <tbody>
                 {% if students|length > 0 %}
                     {% for student in students %}
-                        <tr style='cursor:pointer;' onclick="studentPage({{student.id}})" class="{% if student.student_grades.result == 'ناجح' %} table-success {% else %} table-danger {% endif %}">
+                        <tr style='cursor:pointer;' onclick="studentPage({{student.id}})" class="{% if student.not_attend %} table-warning {% elif student.student_grades.result == 'ناجح' %} table-success {% else %} table-danger {% endif %}">
                             <td>{{ student.file_no }}</td>
                             <td>{{ student.group }}</td>
                             <td>{{ student.name }}</td>
                             <td>{{ student.birthplace }}</td>
                             <td>{% if student.rel %}{{student.rel_to}}{% else %}{% endif %}</td>
                             <td>{{ student.junior_cert_total }}</td>
-
+                            {% if student.not_attend %}
+                                <td colspan='4'>لم يحضر</td>
+                            {% else %}
+                            
                             <td>{{ student.student_grades.total }}/35</td>
                             <td class="{% if student.student_grades.result == 'ناجح' %} text-success {% else %} text-danger {% endif %}">{{ student.student_grades.result }}</td>
                             <td>{{ student.committee_eval.total }}/25</td>
                             <td class="{% if student.student_grades.result == 'ناجح' %} text-success {% else %} text-danger {% endif %}">{{ student.committee_eval.result }}</td>
+                            {% endif %}
+
                         </tr>
                     {% endfor %}
                 {% else %}

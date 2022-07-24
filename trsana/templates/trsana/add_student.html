@@ -1,5 +1,19 @@
 {% extends 'base/main.html' %} {% load crispy_forms_tags %}
- {% block title %}{{ title }}{% endblock %} {% block main %}
+ {% block title %}{{ title }}{% endblock %} 
+ {% block extra_head %}
+ <style>
+  #div_id_not_attend, #div_id_rel{
+    min-width: 500px;
+    display:flex;
+    align-items:flex-end;
+    align-self:flex-end;
+  }
+  #div_id_not_attend input, #div_id_rel input{
+    margin: 0 5px;
+  }
+ </style>
+ {% endblock extra_head %}
+ {% block main %}
 <div>
   <form
     method="POST"
@@ -23,17 +37,17 @@
     {% endif %}
 
     <h2>بيانات الطالب</h2>
-    <div class='d-flex justify-content-between flex-wrap py-4'>
+    <div id='student_form' class='d-flex justify-content-between flex-wrap py-4'>
       {{ student_form|crispy }} 
     </div> 
 
     <h2>تقييم اللجنة</h2>
-    <div class='d-flex justify-content-between flex-wrap py-4'>
+    <div id='comm_form' class='d-flex justify-content-between flex-wrap py-4'>
       {{ committee_form|crispy }} 
     </div> 
 
     <h2>درجات الطالب</h2>
-    <div class='d-flex justify-content-between flex-wrap py-4'>
+    <div id='grades_form' class='d-flex justify-content-between flex-wrap py-4'>
       {{ grades_form|crispy }}
     </div> 
 
@@ -47,14 +61,32 @@
 
 <script>
   var relChk = $('#relChk')
+  var attendChk = $('#attendChk')
+  grades = $('.grade')
   var relName = $('#relName')
+  var relP = $('#div_id_rel').parent()
+  var not_attendP = $('#div_id_not_attend').parent()
+  not_attendP.css('display', 'flex')
+  relP.css('display', 'flex')
+  var commForm = $('#comm_form').children()
+  var gradesForm = $('#grades_form').children()
   $(()=>{
     if (document.getElementById('relChk').checked === true) relName.attr('disabled', false)
+
   })
   relChk.click(()=>{
     console.log(document.getElementById('relChk').checked)
     if (document.getElementById('relChk').checked === true) relName.attr('disabled', false)
     else relName.attr('disabled', true)
+  })
+  attendChk.click(()=>{
+    console.log(document.getElementById('attendChk').checked)
+    for (var i=0; i<grades.length; i++) {
+      if (document.getElementById('attendChk').checked === true) {
+        grades[i].value = 0
+      }
+    }
+
   })
 
 </script>

@@ -164,6 +164,9 @@ def results(request):
     students = Student.objects.all().order_by('file_no')
     cities = [st.birthplace for st in students]
     groups = [st.group for st in students]
+    if request.GET.get('attend') and request.GET.get('attend') != 'الكل':
+        students = students.filter(not_attend=False if request.GET.get('attend') == 'حضر' else True)
+
     if request.GET.get('city') and request.GET.get('city') != 'الكل':
         students = students.filter(birthplace=request.GET.get('city'))
     if request.GET.get('rel') and request.GET.get('rel') != 'الكل':

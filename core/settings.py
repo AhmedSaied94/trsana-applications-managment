@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ['DEV_KEY'] if DEBUG else os.environ['PROD_KEY']
@@ -103,12 +103,12 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'trsana',
-        'HOST': 'localhost',
-        'USER': 'trsana',
-        'PASSWORD': 'trsana.com',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
+        # 'HOST': 'localhost',
+        # 'USER': 'trsana',
+        # 'PASSWORD': 'trsana.com',
+        # 'PORT': '',
     }
 }
 
